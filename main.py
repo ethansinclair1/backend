@@ -1,13 +1,14 @@
 from flask import Flask, jsonify, Response
 
-from app.api.v1.route import router as v1_router
-from app.middleware.ResponseMiddleware import after_request
+from app.api.base_router import router as base_router
+
+from app.middleware.response_middleware import after_request
 
 app = Flask(__name__)
 
 app.before_request(after_request)
 
-app.register_blueprint(v1_router)
+app.register_blueprint(base_router)
 
 
 @app.errorhandler(Exception)
